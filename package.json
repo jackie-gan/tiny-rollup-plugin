@@ -1,0 +1,19 @@
+{
+  "name": "tiny-rollup-plugin",
+  "version": "0.1.0",
+  "description": "a tiny rollup plugin",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jackie-gan/tiny-rollup-plugin.git"
+  },
+  "author": "jackie-gan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jackie-gan/tiny-rollup-plugin/issues"
+  },
+  "homepage": "https://github.com/jackie-gan/tiny-rollup-plugin#readme"
+}
