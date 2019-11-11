@@ -1,5 +1,6 @@
 import { createFilter } from 'rollup-pluginutils';
 import { transform } from 'babel-core';
+import * as t from 'babel-types';
 
 export default function tinyTransfrom(options = {}) {
   const filter = createFilter(options.include, options.exclude);
@@ -9,8 +10,13 @@ export default function tinyTransfrom(options = {}) {
     ImportDeclaration(path) {
       const importValue = path.node.source.value;
       const reg = /\@tarojs\/taro/;
-      const newCode = importValue.replace(reg, '@tarojs/taro-h5');
-      path.node.source.value = newCode;
+      if (reg.test(importValue)) {
+        const newCode = importValue.replace(reg, '@tarojs/taro-h5');
+        path.node.source.value = newCode;
+
+        const nervImport = t.importDeclaration([t.importDefaultSpecifier(t.identifier('Nerv'))], t.stringLiteral('nervjs'));
+        path.insertBefore(nervImport)
+      }
     }
   };
 
@@ -24,8 +30,6 @@ export default function tinyTransfrom(options = {}) {
           visitor: codeVistor
         }
       });
-
-      console.log(transformRes.code);
 
       return transformRes.code
     }
